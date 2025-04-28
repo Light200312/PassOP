@@ -222,7 +222,7 @@ function App() {
                       ></lord-icon>
                     </div>
                   </td>
-                  <td className="border border-[#5f33e0] flex gap-2 sm:gap-3 md:gap-4 justify-center p-2 sm:p-3 md:p-4 items-center">
+                  <td className="border-t border-[#5f33e0] flex gap-2 sm:gap-3 md:gap-4 justify-center p-2 sm:p-3 md:p-4 items-center">
                     <button
                       onClick={() => Deletepassword(item.id)}
                       className=""
