@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "hhttps://github.com/Light200312/PassOP.git",
+"homepage": "https://light200312.github.io/PassOP",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
