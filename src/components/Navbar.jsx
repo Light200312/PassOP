@@ -10,7 +10,7 @@ const Navbar = () => {
           <span className="text-[#5f33e0]"> OP/&gt;</span>
         </div>
 
-        <a href="https://github.com/Light200312/Projects">
+        <a href="https://github.com/Light200312/PassOP">
         
           <div className="flex justify-center items-center border-2 border-white rounded-full">
             <script src="https://cdn.lordicon.com/lordicon.js"></script>

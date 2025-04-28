@@ -84,7 +84,7 @@ function App() {
       <ToastContainer />
       <Navbar />
       <Manager />
-      <div className=" mt-[50px] xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-[90%] mx-auto   ">
+      <div className=" mt-[50px] lg:w-[70%] md:w-[80%] sm:w-[90%] mx-auto   ">
         <div className=" flex flex-col gap-4 p-8 text-white">
           <div className="flex justify-center items-center w-full gap-3 text-[2em] flex-col mb-[9px] ">
             
@@ -93,7 +93,7 @@ function App() {
               <span>Pass</span>
               <span className="text-[#5f33e0]"> OP/&gt;</span>
             </div>
-            <p className="">This is your own Password Manager</p>
+            <p className="text-center text-xl md:text-2xl">This is your own Password Manager</p>
           </div>
           {/* <label htmlFor="website">Website URL</label> */}
 
@@ -156,91 +156,103 @@ function App() {
             Password
           </button>
         </div>
-        <div className="passwardbank">
+        <div className="passwardbank w-full flex justify-center">
           {passwordarray.length === 0 && (
             <div className="text-white"> No passwords to show</div>
           )}
           {passwordarray.length !== 0 && (
-            <table className="table-auto text-sm text-white border-collapse border border-[#5f33e0] w-full rounded-lg ">
-              <thead className="bg-[#5f33e0] text-white ">
-                <tr className="border border-[#5f33e0]">
-                  {/* <th className="py-1">ID</th> */}
-                  <th className="py-1">Website</th>
-                  <th>Username</th>
-                  <th>Passwords</th>
-                  <th>Actions</th>
+  <div className="overflow-x-auto">
+    <table className="table-auto text-sm sm:text-md text-white border-collapse border border-[#5f33e0] w-full rounded-lg">
+      <thead className="bg-[#5f33e0] text-white">
+        <tr className="border border-[#5f33e0]">
+          <th className="py-1 px-2 sm:px-3 md:px-4 text-xs sm:text-sm md:text-base">Website</th>
+          <th className="py-1 px-2 sm:px-3 md:px-4 text-xs sm:text-sm md:text-base">Username</th>
+          <th className="py-1 px-2 sm:px-3 md:px-4 text-xs sm:text-sm md:text-base">Passwords</th>
+          <th className="py-1 px-2 sm:px-3 md:px-4 text-xs sm:text-sm md:text-base">Actions</th>
+        </tr>
+      </thead>
+      {passwordarray.length !== 0 && (
+        <>
+          {passwordarray.map((item, index) => {
+            return (
+              <tbody key={index} className="text-center">
+                <tr>
+                  <td className="border border-[#5f33e0] p-2 sm:p-3 md:p-4 max-w-[100px] sm:max-w-[150px] md:max-w-[200px] break-words text-xs sm:text-sm md:text-base">
+                    <div className="flex justify-center items-center gap-1 sm:gap-2">
+                      <a href={item.website} className="truncate">{item.website}</a>
+                      <div
+                        onClick={() => {
+                          copyToClipboard(item.website);
+                        }}
+                      >
+                        <lord-icon
+                          src="https://cdn.lordicon.com/jectmwqf.json"
+                          trigger="hover"
+                          stroke="bold"
+                          state="hover-squeeze"
+                          colors="primary:#a866ee,secondary:#ffffff"
+                          style={{ width: '20px', height: '20px' }} // Fixed size for consistency
+                        ></lord-icon>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="border border-[#5f33e0] p-2 sm:p-3 md:p-4 max-w-[80px] sm:max-w-[120px] md:max-w-[150px] break-words text-xs sm:text-sm md:text-base">
+                    {item.username}
+                  </td>
+                  <td className="border border-[#5f33e0] p-2 sm:p-3 md:p-4 text-xs sm:text-sm md:text-base">
+                    <div
+                      onClick={() => {
+                        copyToClipboard(item.password);
+                      }}
+                      className="flex justify-center items-center gap-1 sm:gap-2"
+                    >
+                      <img
+                        width={30} // Slightly smaller for small screens
+                        src="key.png"
+                        alt="key icon"
+                        className="w-6 sm:w-8 md:w-10" // Responsive icon size
+                      />
+                      <lord-icon
+                        src="https://cdn.lordicon.com/jectmwqf.json"
+                        trigger="hover"
+                        stroke="bold"
+                        state="hover-squeeze"
+                        colors="primary:#a866ee,secondary:#ffffff"
+                        style={{ width: '20px', height: '20px' }} // Fixed size for consistency
+                      ></lord-icon>
+                    </div>
+                  </td>
+                  <td className="border border-[#5f33e0] flex gap-2 sm:gap-3 md:gap-4 justify-center p-2 sm:p-3 md:p-4 items-center">
+                    <button
+                      onClick={() => Deletepassword(item.id)}
+                      className=""
+                    >
+                      <img
+                        src="delete.png"
+                        alt="delete icon"
+                        className="w-5 sm:w-6 md:w-7" // Responsive icon size
+                      />
+                    </button>
+                    <button
+                      onClick={() => editpassword(item.id)}
+                      className=""
+                    >
+                      <img
+                        src="edit.png"
+                        alt="edit icon"
+                        className="w-5 sm:w-6 md:w-7" // Responsive icon size
+                      />
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              {passwordarray.length !== 0 && (
-                <>
-                  {passwordarray.map((item, index) => {
-                    return (
-                      <tbody key={index} className="text-center  ">
-                        <tr>
-                          {/* <td className="border p-2 border-[#5f33e0]">{item.id}</td> */}
-                          <td className="border p-2 border-[#5f33e0]">
-                            <div className="flex justify-center items-center gap-2">
-                              <a href={item.website}>{item.website}</a>
-                              <div
-                                onClick={() => {
-                                  copyToClipboard(item.website);
-                                }}
-                              >
-                                <lord-icon
-                                  src="https://cdn.lordicon.com/jectmwqf.json"
-                                  trigger="hover"
-                                  stroke="bold"
-                                  state="hover-squeeze"
-                                  colors="primary:#a866ee,secondary:#ffffff"
-                                  // style="width:250px;height:250px"
-                                ></lord-icon>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="border p-2 border-[#5f33e0]">
-                            {item.username}
-                          </td>
-                          <td className="border p-2 border-[#5f33e0]">
-                            <div
-                              onClick={() => {
-                                copyToClipboard(item.password);
-                              }}
-                              className="flex justify-center items-center gap-2"
-                            >
-                             <img width={40} src="key.png" alt="" />
-                              <lord-icon
-                                src="https://cdn.lordicon.com/jectmwqf.json"
-                                trigger="hover"
-                                stroke="bold"
-                                state="hover-squeeze"
-                                colors="primary:#a866ee,secondary:#ffffff"
-                                // style="width:250px;height:250px"
-                              ></lord-icon>
-                            </div>
-                          </td>
-                          <td className=" flex gap-4 justify-center p-4 items-center">
-                            <button
-                              onClick={() => Deletepassword(item.id)}
-                              className=""
-                            >
-                             <img width={25} src="delete.png" alt="" />
-                            </button>
-
-                            <button
-                              onClick={() => editpassword(item.id)}
-                              className=""
-                            >
-                             <img width={25} src="edit.png" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    );
-                  })}
-                </>
-              )}
-            </table>
-          )}
+              </tbody>
+            );
+          })}
+        </>
+      )}
+    </table>
+  </div>
+)}
         </div>
       </div>
       <Footer />
